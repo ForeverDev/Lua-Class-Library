@@ -76,12 +76,12 @@ function Vector:magnitude()
 end
 
 --this method will go into Vector's metatable!
-function Vector.__add(other_vector)
+function Vector.__add(self, other_vector) --'self' must be the first argument in a metatable method
   return Vector(self.x + other_vector.x, self.y + other_vector.y)
 end
 
 --this method will also go into Vector's metatable!
-function Vector.__tostring()
+function Vector.__tostring(self)
   return "[" .. self.x .. ", " .. self.y .. "]"
 end
 ```
