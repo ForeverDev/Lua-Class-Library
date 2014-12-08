@@ -36,4 +36,29 @@ end
 local pedro = Animal(7) --create a new animal, pass '7' as the age
 print(pedro.age) --> prints out '7'
 ```
+Now we know the basics of the library.  However, this wouldn't be a class system without inheritance!
+To extend a class to another class, do the following:
+```lua
+local class = require(path_to_file)
+local ClassOne = class()
+local ClassTwo = class()
+ClassTwo.extends = ClassOne --extend ClassTwo to ClassOne, now ClassTwo has all method that ClassOne has
+```
+Finally, you define a method the same way you define the <b>init</b> method.
+```lua
+local class = require(path_to_file)
+local Dog = class()
+
+function Dog:init(name)
+  self.name = name
+end
+
+--here, we define the method 'bark'
+function Dog:bark()
+  print(self.name .. " barked!")
+end
+
+local pedro = Dog "Pedro" --create a new class, pass "Pedro" as the name argument
+pedro:bark() --> 'Pedro barked!'
+```
 
