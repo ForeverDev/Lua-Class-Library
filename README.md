@@ -84,4 +84,11 @@ end
 function Vector.__tostring(self)
   return "[" .. self.x .. ", " .. self.y .. "]"
 end
+
+local vector_one = Vector(5, 10)
+local vector_two = Vector(15, 31)
+local new_vector = vector_one + vector_two
+
+print(new_vector) --> [20, 41]
+print(new_vector:magnitude()) --> 45.617978911828
 ```
