@@ -61,4 +61,27 @@ end
 local pedro = Dog "Pedro" --create a new class, pass "Pedro" as the name argument
 pedro:bark() --> 'Pedro barked!'
 ```
+<h1>Some Examples</h1>
+```lua
+local class = require(path_to_file)
+local Vector = class() --define a Vector class
 
+function Vector:init(x, y)
+  self.x = x
+  self.y = y
+end
+
+function Vector:magnitude()
+  return math.sqrt(self.x ^ 2 + self.y ^ 2)
+end
+
+--this method will go into Vector's metatable!
+function Vector.__add(other_vector)
+  return Vector(self.x + other_vector.x, self.y + other_vector.y)
+end
+
+--this method will also go into Vector's metatable!
+function Vector.__tostring()
+  return "[" .. self.x .. ", " .. self.y .. "]"
+end
+```
