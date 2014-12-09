@@ -11,7 +11,7 @@ end
 
 function module.__newindex(self, key, value)
 	if key == "extends" then
-		local meta = getmetatable(self).__index = function(this, key)
+		getmetatable(self).__index = function(this, key)
 			return rawget(value, key) or rawget(module, key)
 		end
 	elseif key:sub(1, 2) == "__" then
