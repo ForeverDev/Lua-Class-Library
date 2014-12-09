@@ -4,29 +4,25 @@ module.__index = module
 function copy(array)
 	local new = {}
 	for i, v in pairs(array) do
-		new[i] = v
+		new[i] = type(v) == "table" and copy(v) or v
 	end
 	return new
 end
 
 function module.__newindex(self, key, value)
 	if key == "extends" then
-		local meta = getmetatable(self)
-		meta.__index = function(this, key)
+		local meta = getmetatable(self).__index = function(this, key)
 			return rawget(value, key) or rawget(module, key)
 		end
-		return setmetatable(self, meta)
 	elseif key:sub(1, 2) == "__" then
-		local meta = getmetatable(self)
-		meta[key] = value
-		return setmetatable(self, meta)
+		getmetatable(self)[key] = value
 	else
 		rawset(self, key, value)
 	end
 end
 
 function module.__call(self, ...)
-	local new = setmetatable(copy(self), getmetatable(self))
+	local new = setmetatable(copy(self), copy(getmetatable(self)))
 	if new.init then
 		new:init(...)
 	end
